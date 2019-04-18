@@ -1,5 +1,8 @@
 # Compiled class file
-*.class
+/CashMoneyBanking/bin/*.class
+
+# Bin .fxml files
+/CashMoneyBanking/bin/*.fxml
 
 # Log file
 *.log
