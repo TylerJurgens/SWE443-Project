@@ -13,18 +13,34 @@ public class LoginController {
 	@FXML
 	private Button loginButton;
 	@FXML
-	private TextField usernameField;
+	private TextField usernameLoginField;
 	@FXML
-	private TextField passwordField;
+	private TextField passwordLoginField;
 	@FXML
-	private Label authErrorLabel;
+	private Label authErrorLoginLabel;
+	@FXML
+	private Button signupButton;
+	@FXML
+	private TextField usernameSignupField;
+	@FXML
+	private TextField passwordSignupField;
+	@FXML
+	private Label authErrorSignupLabel;
+	
 	
 	@FXML
-	private void LoginClicked() {
-		System.out.println("Username: " + this.usernameField.getText());
-		System.out.println("Password: " + this.passwordField.getText());
+	private void signupClicked() {
+		if(this.usernameSignupField.getText().equalsIgnoreCase("bob")) {
+			this.authErrorSignupLabel.setVisible(true);
+		}
+	}
+	
+	@FXML
+	private void loginClicked() {
+		System.out.println("Username: " + this.usernameLoginField.getText());
+		System.out.println("Password: " + this.passwordLoginField.getText());
 		
-		if(this.usernameField.getText().equalsIgnoreCase("bobby") && this.passwordField.getText().equals("pw")) {
+		if(this.usernameLoginField.getText().equalsIgnoreCase("bob") && this.passwordLoginField.getText().equals("pw")) {
 			Stage s = (Stage)(loginButton.getScene().getWindow());
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("PrimaryScreen.fxml"));
 			
@@ -36,7 +52,7 @@ public class LoginController {
 			}
 			s.setScene(scene);
 		} else {
-			this.authErrorLabel.setVisible(true);
+			this.authErrorLoginLabel.setVisible(true);
 		}
 	}
 }
