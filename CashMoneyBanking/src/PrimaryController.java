@@ -7,11 +7,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.ToggleButton;
 import javafx.stage.Stage;
 
 public class PrimaryController {
 	
-	private VirtHelpEventHandler virtHelp = new VirtHelpEventHandler();
+	private VirtHelpEventHandler virtHelp;
+	private boolean helpToggle;
 
 	@FXML
 	private Button signoutButton;
@@ -23,6 +25,17 @@ public class PrimaryController {
 	private Tab accountsTab;
 	@FXML
 	private Tab settingsTab;
+	@FXML
+	private ToggleButton virtHelpToggle;
+	
+	@FXML
+	public void initialize() { //Automatically called upon being loaded
+		this.virtHelp = new VirtHelpEventHandler();
+		
+		this.helpToggle = false; // should be retrieved from database
+		this.virtHelpToggle.setSelected(!this.helpToggle);
+		this.virtHelp.handleEvent(this.helpToggle, this.helperText, this.virtHelpToggle.getText());
+	}
 	
 	@FXML
 	private void tabChanged() {
@@ -31,7 +44,7 @@ public class PrimaryController {
 		
 		for(Tab tab : this.tabPane.getTabs()) {
 			if(tab.isSelected()) {
-				virtHelp.handleEvent(this.helperText, tab.getText());
+				virtHelp.handleEvent(this.helpToggle, this.helperText, tab.getText());
 				return;
 			}
 		}
@@ -49,5 +62,11 @@ public class PrimaryController {
 			e.printStackTrace();
 		}
 		s.setScene(scene);
+	}
+	
+	@FXML
+	private void virtHelpToggled() { // this should update the user's choice in the database
+		this.helpToggle = !this.virtHelpToggle.isSelected();
+		this.virtHelp.handleEvent(this.helpToggle, this.helperText, this.virtHelpToggle.getText());
 	}
 }
