@@ -31,7 +31,7 @@
                 	<content>
                 		<Pane prefHeight="200.0" prefWidth="438.0">
                 			<children>
-                				<Label id="fruitSelectorLabel" layoutX="14.0" layoutY="16.0" styleClass="bold-label" text="Account:" />
+                				<Label id="accountSelectionLabel" layoutX="14.0" layoutY="16.0" styleClass="bold-label" text="Account:" />
                 				<ComboBox fx:id="accountSelection" layoutX="85.0" LayoutY="13.0" promptText="Choose your Account">
                 					<items>
                 						<FXCollections fx:factory="observableArrayList">

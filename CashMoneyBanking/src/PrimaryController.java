@@ -1,5 +1,9 @@
 import java.io.IOException;
 
+
+
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,6 +20,20 @@ public class PrimaryController {
 	private Label helperText;
 	@FXML
 	private ComboBox<String> accountSelection;
+	
+	private String currentAccount;
+	
+	public void initialize() {
+		currentAccount = null;
+		
+	    accountSelection.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+	      @Override public void changed(ObservableValue<? extends String> selected, String oldAccount, String newAccount) {
+	    	  currentAccount = newAccount;
+	    	  System.out.println(currentAccount);
+	      }
+	    });
+	}
+	
 	
 	@FXML
 	private void signoutClicked() {
