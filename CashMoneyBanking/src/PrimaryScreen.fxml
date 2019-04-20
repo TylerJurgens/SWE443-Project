@@ -21,10 +21,10 @@
          </children></AnchorPane>
       <SplitPane dividerPositions="0.7408026755852842" prefHeight="160.0" prefWidth="200.0">
         <items>
-            <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+            <TabPane fx:id="tabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
-                <Tab text="Accounts" />
-                <Tab text="Settings">
+                <Tab fx:id="accountsTab" onSelectionChanged="#tabChanged" text="Accounts" />
+                <Tab fx:id="settingsTab" onSelectionChanged="#tabChanged" text="Settings">
                      <content>
                         <Pane prefHeight="200.0" prefWidth="438.0">
                            <children>
