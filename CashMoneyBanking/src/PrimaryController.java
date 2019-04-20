@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 
 public class PrimaryController {
@@ -13,6 +14,8 @@ public class PrimaryController {
 	private Button signoutButton;
 	@FXML
 	private Label helperText;
+	@FXML
+	private ComboBox<String> accountSelection;
 	
 	@FXML
 	private void signoutClicked() {
