@@ -26,6 +26,6 @@ hs_err_pid*
 
 # Eclipse Files
 /.metadata/
-
+/.recommenders/
 /CashMoneyBanking/.classpath
 /CashMoneyBanking/.project

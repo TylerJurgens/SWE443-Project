@@ -47,8 +47,9 @@ public class PrimaryController {
 	public void initialize() { //Automatically called upon being loaded
 		this.virtHelp = new VirtHelpEventHandler();
 		
-		this.helpToggle = false; // should be retrieved from database
+		this.helpToggle = true; // should be retrieved from database
 		this.virtHelpToggle.setSelected(!this.helpToggle);
+		this.virtHelpToggle.setText((this.helpToggle) ?"On":"Off");
 		this.virtHelp.handleEvent(this.helpToggle, this.helperText, this.virtHelpToggle.getText());
 		
 		this.currentAccount = -1;
@@ -107,6 +108,9 @@ public class PrimaryController {
 	@FXML
 	private void virtHelpToggled() { // this should update the user's choice in the database
 		this.helpToggle = !this.virtHelpToggle.isSelected();
+		
+		this.virtHelpToggle.setText((this.helpToggle) ?"On":"Off");
+		
 		this.virtHelp.handleEvent(this.helpToggle, this.helperText, this.virtHelpToggle.getText());
 	}
 }

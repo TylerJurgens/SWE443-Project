@@ -7,7 +7,7 @@ public class VirtHelpEventHandler {
 		// Virtual Helper Label is set to give advice about whichever component was clicked
 		if(!helperOn) {
 			virtHelper.setText("The helper has been turned off.");
-		} else if(compText.equals("Turn Off")) {
+		} else if(compText.equals("On")) {
 			virtHelper.setText("Useful Information about clicked features of our banking application will appear here (if turned on).");
 		} else if(compText.equals("Accounts")) {
 			virtHelper.setText("The Accounts tab displays all information about your accounts.");
