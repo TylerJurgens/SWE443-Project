@@ -21,16 +21,38 @@ public class PrimaryController {
 	@FXML
 	private ComboBox<String> accountSelection;
 	
-	private String currentAccount;
+	//Holds the ID of the current displayed account
+	private int currentAccount;
+	//View class for MVP architecture
+	private MVPView view;
+	
+	private int[] accountIDs;
+	
 	
 	public void initialize() {
-		currentAccount = null;
+		currentAccount = -1;
+		view = new MVPView();
+		accountIDs = view.fetchAccounts("bob");
 		
+		
+		//Binds a listener to accountSelection, updating the value of currentAccount when changed
 	    accountSelection.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-	      @Override public void changed(ObservableValue<? extends String> selected, String oldAccount, String newAccount) {
-	    	  currentAccount = newAccount;
-	    	  System.out.println(currentAccount);
-	      }
+	    		@Override public void changed(ObservableValue<? extends String> selected, String oldAccount, String newAccount) {
+	    			if(newAccount != null)
+	    			{
+	    				switch(newAccount)
+	    				{
+	    					case "Savings":
+	    						currentAccount = accountIDs[0];
+	    						break;
+	    					case "Checkings":
+	    						currentAccount = accountIDs[1];
+	    						break;
+	    				}
+	    				System.out.println(view.fetchBalance(currentAccount, "bob"));
+	    			}
+	    			
+	    		}
 	    });
 	}
 	
