@@ -44,13 +44,9 @@
                 				</ComboBox>
                 				<Label fx:id="balanceLabel" alignment="TOP_LEFT" layoutX="14.0" layoutY="60.0" text="Balance:" textAlignment="CENTER" />
                 				<Label fx:id="balanceValue" alignment="TOP_LEFT" layoutX="80.0" layoutY="60.0" text="" textAlignment="CENTER" />
-                				<ScrollPane id="transactionHistoryPane" layoutX = "14" layoutY = "175">
+                				<ScrollPane id="transactionHistoryPane" layoutX = "14" layoutY = "175" prefWidth="400" prefHeight="50">
                 					<content>
-                						<VBox prefWidth="400" prefHeight="50" alignment="center" fx:id="transactionScroll">
-                							<children>
-                								<Label fx:id="transactionHistory" alignment="TOP_LEFT" text="" textAlignment="LEFT" wrapText = "True"/>
-                							</children>
-                						</VBox>
+                							<Label fx:id="transactionHistory" alignment="TOP_LEFT" text="" textAlignment="LEFT" wrapText = "True"/>
                 					</content>
                 				</ScrollPane>
                 				<Button fx:id="depositButton" layoutX="14.0" layoutY="100.0" mnemonicParsing="false" onAction="#depositOnClick" text="Make Deposit" />
