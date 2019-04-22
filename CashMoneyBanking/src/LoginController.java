@@ -42,7 +42,7 @@ public class LoginController {
 	
 	@FXML
 	private void signupClicked() {
-		if(this.usernameSignupField.getText().equalsIgnoreCase("bob")) {
+		if(readUser(this.usernameSignupField.getText())) {
 			this.authErrorSignupLabel.setVisible(true);
 		}
 		else {
@@ -68,7 +68,34 @@ public class LoginController {
 		}
 	}
 	private static Scanner scanner;
-	private static boolean readUser(String user, String pass) {
+	private static boolean readUser(String user) {
+		boolean foundUser = false;
+		boolean ans = false;
+		String username = "";
+		try {
+			scanner = new Scanner(new File(filepath));
+			scanner.useDelimiter("[,\n]");
+				
+			while(scanner.hasNext() && !foundUser) {
+				username = scanner.next();
+				scanner.next();
+				System.out.println(username);
+				if(username.equals(user)) {
+					foundUser = true;
+					System.out.println("User = true");
+				}
+				if(foundUser) {
+					ans = true;
+				}
+			}
+		}
+		catch(Exception e) {
+			JOptionPane.showMessageDialog(null, "Read failed");
+		}
+		return ans;
+		
+	}
+	private static boolean readUserAndPass(String user, String pass) {
 		boolean foundUser = false;
 		boolean correctPassword = false;
 		boolean ans = false;
@@ -88,7 +115,7 @@ public class LoginController {
 					System.out.println("User = true");
 					if(password.equals(pass)) {
 						correctPassword = true;
-						System.out.println("pass = true");
+						System.out.println("Pass = true");
 					}
 				}
 				if(foundUser) {
@@ -108,7 +135,7 @@ public class LoginController {
 		System.out.println("Username: " + this.usernameLoginField.getText());
 		System.out.println("Password: " + this.passwordLoginField.getText());
 		
-		if(readUser(this.usernameLoginField.getText(), this.passwordLoginField.getText())) {
+		if(readUserAndPass(this.usernameLoginField.getText(), this.passwordLoginField.getText())) {
 			Stage s = (Stage)(loginButton.getScene().getWindow());
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("PrimaryScreen.fxml"));
 			
