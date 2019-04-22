@@ -29,3 +29,6 @@ hs_err_pid*
 /.recommenders/
 /CashMoneyBanking/.classpath
 /CashMoneyBanking/.project
+
+# User info
+/CashMoneyBanking/user.txt

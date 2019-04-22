@@ -1,2 +1,0 @@
-billy,pw
-me,yes

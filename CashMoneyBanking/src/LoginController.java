@@ -148,7 +148,8 @@ public class LoginController {
 		System.out.println("Username: " + this.usernameLoginField.getText());
 		System.out.println("Password: " + this.passwordLoginField.getText());
 		
-		if(readUserAndPass(this.usernameLoginField.getText(), this.passwordLoginField.getText())) {
+		String username = this.usernameLoginField.getText();
+		if(readUserAndPass(username, this.passwordLoginField.getText())) {
 		// This if statement should check the username and password against the database
 			Stage s = (Stage)(loginButton.getScene().getWindow());
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("PrimaryScreen.fxml"));
@@ -160,6 +161,10 @@ public class LoginController {
 				e.printStackTrace();
 			}
 			s.setScene(scene);
+			
+			PrimaryController cont = loader.<PrimaryController>getController();
+			cont.setUser(username);
+			
 		} else {
 			this.authErrorLoginLabel.setVisible(true);
 		}

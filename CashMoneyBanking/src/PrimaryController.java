@@ -88,6 +88,10 @@ public class PrimaryController {
 	    });
 	}
 	
+	public void setUser(String user) {
+		this.name = user;
+	}
+	
 	@FXML
 	private void tabChanged() {
 		// Tab pane gets initialized before virtual helper pane, so first call of this would throw null pointer
