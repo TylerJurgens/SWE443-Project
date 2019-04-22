@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.ToggleButton;
@@ -36,7 +37,11 @@ public class PrimaryController {
 	@FXML
 	private ComboBox<String> accountSelection;
 	@FXML
-	private Label balanceLabel, balanceValue;
+	private Label balanceLabel, balanceValue, transactionHistory;
+	@FXML
+	private ScrollPane transactionHistoryPane;
+	@FXML
+	private Button depositButton, withdrawButton;
 	
 	//Holds the ID of the current displayed account
 	private int currentAccount;
@@ -76,6 +81,7 @@ public class PrimaryController {
 	    						break;
 	    				}
 	    				balanceValue.setText("" + presenter.fetchBalance(currentAccount, "bob"));
+	    				transactionHistory.setText(presenter.fetchTransactionHistory(currentAccount, "bob"));
 	    			}
 	    			
 	    		}
@@ -107,6 +113,18 @@ public class PrimaryController {
 			e.printStackTrace();
 		}
 		s.setScene(scene);
+	}
+	
+	@FXML
+	private void depositOnClick() {
+		balanceValue.setText(""+presenter.deposit(currentAccount, "bob", 20));
+		transactionHistory.setText(presenter.fetchTransactionHistory(currentAccount, "bob"));
+	}
+	
+	@FXML
+	private void withdrawOnClick() {
+		balanceValue.setText(""+presenter.withdraw(currentAccount, "bob", 20));
+		transactionHistory.setText(presenter.fetchTransactionHistory(currentAccount, "bob"));
 	}
 	
 	@FXML
