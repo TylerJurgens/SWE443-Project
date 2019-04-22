@@ -40,6 +40,9 @@
         								</FXCollections>
                 					</items>
                 				</ComboBox>
+                				<Label fx:id="balanceLabel" alignment="TOP_LEFT" layoutX="14.0" layoutY="60.0" text="Balance:" textAlignment="CENTER" />
+                				<Label fx:id="balanceValue" alignment="TOP_LEFT" layoutX="80.0" layoutY="60.0" text="" textAlignment="CENTER" />
+                				
                 			</children>
                 		</Pane>
                 	</content>

@@ -35,11 +35,15 @@ public class PrimaryController {
 	
 	@FXML
 	private ComboBox<String> accountSelection;
+	@FXML
+	private Label balanceLabel, balanceValue;
 	
 	//Holds the ID of the current displayed account
 	private int currentAccount;
-	//View class for MVP architecture
-	private MVPView view;
+	//Presenter class for MVP architecture
+	private MVPresenter presenter;
+	//Name of the currently logged in user
+	private String name;
 	
 	private int[] accountIDs;
 	
@@ -53,8 +57,8 @@ public class PrimaryController {
 		this.virtHelp.handleEvent(this.helpToggle, this.helperText, this.virtHelpToggle.getText());
 		
 		this.currentAccount = -1;
-		this.view = new MVPView();
-		this.accountIDs = view.fetchAccounts("bob");
+		this.presenter = new MVPresenter();
+		this.accountIDs = presenter.fetchAccounts("bob");
 		
 		
 		//Binds a listener to accountSelection, updating the value of currentAccount when changed
@@ -71,7 +75,7 @@ public class PrimaryController {
 	    						currentAccount = accountIDs[1];
 	    						break;
 	    				}
-	    				System.out.println(view.fetchBalance(currentAccount, "bob"));
+	    				balanceValue.setText("" + presenter.fetchBalance(currentAccount, "bob"));
 	    			}
 	    			
 	    		}
