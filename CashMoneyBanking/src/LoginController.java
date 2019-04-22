@@ -69,7 +69,7 @@ public class LoginController {
 			BufferedWriter bw = new BufferedWriter(fw);
 			PrintWriter pw = new PrintWriter(bw);
 			
-			pw.println(username+", "+password);
+			pw.println(username+","+password);
 			pw.flush();
 			pw.close();
 			
