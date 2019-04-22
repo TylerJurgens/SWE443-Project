@@ -42,8 +42,27 @@ public class LoginController {
 	
 	@FXML
 	private void signupClicked() {
+<<<<<<< HEAD
 		if(readUser(this.usernameSignupField.getText())) {
+=======
+		if(this.usernameSignupField.getText().equalsIgnoreCase("bob")) {
+			// Username already in use
+			this.authSuccessSignupLabel.setVisible(false);
+			this.authError2SignupLabel.setVisible(false);
+>>>>>>> branch 'dev' of https://github.com/TylerJurgens/SWE443-Project
 			this.authErrorSignupLabel.setVisible(true);
+		} else if(this.usernameSignupField.getText().length()==0 || this.passwordSignupField.getText().length()==0){
+			// Empty username or password field
+			this.authErrorSignupLabel.setVisible(false);
+			this.authSuccessSignupLabel.setVisible(false);
+			this.authError2SignupLabel.setVisible(true);
+		} else {
+			// Successful signup
+			this.authErrorSignupLabel.setVisible(false);
+			this.authError2SignupLabel.setVisible(false);
+			this.authSuccessSignupLabel.setVisible(true);
+			
+			// Should add username and password to database here
 		}
 		else {
 			saveUser(this.usernameSignupField.getText(), this.passwordSignupField.getText());
@@ -135,7 +154,12 @@ public class LoginController {
 		System.out.println("Username: " + this.usernameLoginField.getText());
 		System.out.println("Password: " + this.passwordLoginField.getText());
 		
+<<<<<<< HEAD
 		if(readUserAndPass(this.usernameLoginField.getText(), this.passwordLoginField.getText())) {
+=======
+		// This if statement should check the username and password against the database
+		if(this.usernameLoginField.getText().equalsIgnoreCase("bob") && this.passwordLoginField.getText().equals("pw")) {
+>>>>>>> branch 'dev' of https://github.com/TylerJurgens/SWE443-Project
 			Stage s = (Stage)(loginButton.getScene().getWindow());
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("PrimaryScreen.fxml"));
 			

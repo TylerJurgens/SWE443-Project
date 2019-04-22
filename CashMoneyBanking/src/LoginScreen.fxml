@@ -41,6 +41,8 @@
             <TextField fx:id="passwordSignupField" layoutX="104.0" layoutY="129.0" prefHeight="11.0" prefWidth="149.0" />
             <Button fx:id="signupButton" layoutX="195.0" layoutY="161.0" mnemonicParsing="false" onAction="#signupClicked" text="Sign Up" />
             <Label fx:id="authErrorSignupLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="123.0" layoutY="202.0" text="Username already in use" textFill="RED" visible="false" />
+            <Label fx:id="authSuccessSignupLabel" layoutX="158.0" layoutY="202.0" text="Signup Successful" textFill="#1bd027" visible="false" />
+            <Label fx:id="authError2SignupLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="94.0" layoutY="202.0" text="Invalid username or password" textFill="RED" visible="false" />
          </children>
       </AnchorPane>
   </items>
