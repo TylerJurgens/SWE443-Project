@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
@@ -42,6 +43,17 @@ public class PrimaryController {
 	private ScrollPane transactionHistoryPane;
 	@FXML
 	private Button depositButton, withdrawButton;
+	
+	@FXML
+	private Label settings_nameLabel;
+	@FXML
+	private TextField settings_nameField;
+	@FXML
+	private Label settings_passwordLabel;
+	@FXML
+	private TextField settings_passwordField;
+	@FXML
+	private Button settings_update;
 	
 	//Holds the ID of the current displayed account
 	private int currentAccount;
