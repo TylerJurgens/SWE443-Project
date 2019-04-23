@@ -78,7 +78,7 @@ public class PrimaryController {
 		
 		this.currentAccount = -1;
 		this.presenter = new MVPresenter();
-		this.accountIDs = presenter.fetchAccounts("bob");
+		this.accountIDs = presenter.fetchAccounts(name);
 		
 		
 		//Binds a listener to accountSelection, updating the value of currentAccount when changed
@@ -166,7 +166,7 @@ public class PrimaryController {
 	
 	@FXML
 	private void withdrawOnClick() {
-		if(this.currentAccount == -1) {
+		if(this.currentAccount != -1) {
 		double amount = 0;
 		boolean valid = true;
 		try {
