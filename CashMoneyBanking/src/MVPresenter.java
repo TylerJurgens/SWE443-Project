@@ -20,12 +20,12 @@ public class MVPresenter {
 		return model.getAccounts(userName);
 	}
 	
-	public double deposit(int accountNumber, String userName, int amount)
+	public double deposit(int accountNumber, String userName, double amount)
 	{
 		return model.depositFunds(accountNumber, amount);
 	}
 	
-	public double withdraw(int accountNumber, String userName, int amount)
+	public double withdraw(int accountNumber, String userName, double amount)
 	{
 		return model.withdrawFunds(accountNumber, amount);
 	}

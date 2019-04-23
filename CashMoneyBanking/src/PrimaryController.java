@@ -1,6 +1,6 @@
 import java.io.IOException;
 
-
+import javax.swing.JOptionPane;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -12,7 +12,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.paint.Color;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 
@@ -37,11 +39,13 @@ public class PrimaryController {
 	@FXML
 	private ComboBox<String> accountSelection;
 	@FXML
-	private Label balanceLabel, balanceValue, transactionHistory;
+	private Label balanceLabel, balanceValue, transactionHistory, errorLabel;
 	@FXML
 	private ScrollPane transactionHistoryPane;
 	@FXML
 	private Button depositButton, withdrawButton;
+	@FXML
+	private TextField depositField;
 	
 	//Holds the ID of the current displayed account
 	private int currentAccount;
@@ -117,14 +121,71 @@ public class PrimaryController {
 	
 	@FXML
 	private void depositOnClick() {
-		balanceValue.setText(""+presenter.deposit(currentAccount, "bob", 20));
-		transactionHistory.setText(presenter.fetchTransactionHistory(currentAccount, "bob"));
+		if(this.currentAccount != -1)
+		{
+		double amount = 0;
+		boolean valid = true;
+		try {
+			amount = Double.parseDouble(depositField.getText());
+		} catch (Exception e){
+			//errorLabel.setTextFill(Color.RED);
+			//errorLabel.setText("Invalid value given for deposit: Not a number");
+			JOptionPane.showMessageDialog(null, "Invalid value given for deposit: Not a number");
+			valid = false;
+		}
+		if(valid && amount <= 0)
+		{
+			//errorLabel.setTextFill(Color.RED);
+			//errorLabel.setText("Invalid value given for deposit: Please enter a number greater than 0");
+			JOptionPane.showMessageDialog(null, "Invalid value given for deposit: Please enter a number greater than 0");
+		}
+		else if(valid) {
+			balanceValue.setText(""+presenter.deposit(currentAccount, name, amount));
+			transactionHistory.setText(presenter.fetchTransactionHistory(currentAccount, name));
+
+			JOptionPane.showMessageDialog(null, "Deposit successfully completed");
+		}
+		}else
+			JOptionPane.showMessageDialog(null, "Please select an account first");
 	}
 	
 	@FXML
 	private void withdrawOnClick() {
-		balanceValue.setText(""+presenter.withdraw(currentAccount, "bob", 20));
-		transactionHistory.setText(presenter.fetchTransactionHistory(currentAccount, "bob"));
+		if(this.currentAccount == -1) {
+		double amount = 0;
+		boolean valid = true;
+		try {
+			amount = Double.parseDouble(depositField.getText());
+		} catch (Exception e){
+			//errorLabel.setTextFill(Color.RED);
+			//errorLabel.setText("Invalid value given for withdrawal: Not a number");
+			JOptionPane.showMessageDialog(null, "Invalid value given for withdrawal: Please enter a number greater than 0");
+			valid = false;
+		}
+		if(valid && amount <= 0)
+		{
+			//errorLabel.setTextFill(Color.RED);
+			//errorLabel.setText("Invalid value given for withdrawal: Please enter a number greater than 0");
+			JOptionPane.showMessageDialog(null, "Invalid value given for withdrawal: Please enter a number greater than 0");
+		}
+		else if(valid) {
+			amount = presenter.withdraw(currentAccount, name, amount);
+			if(amount >= 0)
+			{
+				balanceValue.setText(""+amount);
+				transactionHistory.setText(presenter.fetchTransactionHistory(currentAccount, name));
+				//errorLabel.setTextFill(Color.GREEN);
+				//errorLabel.setText("Withdrawal successfully completed");
+				JOptionPane.showMessageDialog(null, "Withdrawal successfully completed");
+			}else if(amount == -2)
+			{
+				//errorLabel.setTextFill(Color.RED);
+				//errorLabel.setText("Invalid value given for withdrawal: Not enough funds to withdraw");
+				JOptionPane.showMessageDialog(null, "Withdrawal failed: Not enough funds to withdraw");
+			}
+		}
+		}else
+			JOptionPane.showMessageDialog(null, "Please select an account first");
 	}
 	
 	@FXML

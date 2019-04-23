@@ -28,7 +28,7 @@ public class Account {
 	public double addMoney(double amount)
 	{
 		balance += amount;
-		transactionHistory += "[" + LocalDateTime.now() + "] Deposit of $" + amount + " - new balance is $" + balance + "\r\n";
+		transactionHistory = "[" + LocalDateTime.now() + "] Deposit of $" + amount + " - new balance is $" + balance + "\r\n" + transactionHistory;
 		return balance;
 	}
 

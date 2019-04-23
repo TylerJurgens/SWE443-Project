@@ -152,7 +152,6 @@ public class LoginController {
 		// This if statement should check the username and password against the database
 			Stage s = (Stage)(loginButton.getScene().getWindow());
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("PrimaryScreen.fxml"));
-			
 			Scene scene = null;
 			try {
 				scene = new Scene(loader.load());
