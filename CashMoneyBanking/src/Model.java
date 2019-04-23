@@ -3,10 +3,12 @@ public class Model {
 	
 	private Customer customer;
 	
+	private String name = PrimaryController.getUser();
+	
 	public Model()
 	{
-		Account [] accounts = {new Account(1,20), new Account(2,100)};
-		this.customer = new Customer("bob",accounts);
+		Account [] accounts = {new Account(1,PrimaryController.readSavings()), new Account(2,PrimaryController.readChecking())};
+		this.customer = new Customer(name,accounts);
 	}
 	
 	public int[] getAccounts(String customer)

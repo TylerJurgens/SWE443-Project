@@ -1,6 +1,11 @@
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Scanner;
 
-
+import javax.swing.JOptionPane;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -48,7 +53,7 @@ public class PrimaryController {
 	//Presenter class for MVP architecture
 	private MVPresenter presenter;
 	//Name of the currently logged in user
-	private String name;
+	private static String name;
 	
 	private int[] accountIDs;
 	
@@ -63,7 +68,7 @@ public class PrimaryController {
 		
 		this.currentAccount = -1;
 		this.presenter = new MVPresenter();
-		this.accountIDs = presenter.fetchAccounts("bob");
+		this.accountIDs = presenter.fetchAccounts(name);
 		
 		
 		//Binds a listener to accountSelection, updating the value of currentAccount when changed
@@ -80,12 +85,213 @@ public class PrimaryController {
 	    						currentAccount = accountIDs[1];
 	    						break;
 	    				}
-	    				balanceValue.setText("" + presenter.fetchBalance(currentAccount, "bob"));
-	    				transactionHistory.setText(presenter.fetchTransactionHistory(currentAccount, "bob"));
+	    				balanceValue.setText("" + presenter.fetchBalance(currentAccount, name));
+	    				transactionHistory.setText(presenter.fetchTransactionHistory(currentAccount, name));
 	    			}
 	    			
 	    		}
 	    });
+	}
+	
+	public void setUser(String user) {
+		this.name = user;
+	}
+	
+	public static String getUser() {
+		return name;
+	}
+	
+	private static Scanner scanner;
+	public static double readChecking() {
+		String username = "";
+		String accountType = "";
+		double balance = 0;
+		try {
+			scanner = new Scanner(new File("accounts.txt"));
+			scanner.useDelimiter("[,\n]");
+				
+			while(scanner.hasNext()) {
+				username = scanner.next();
+				accountType = scanner.next();
+				balance = Double.valueOf(scanner.next());
+				System.out.println(username);
+				if(username.equals(name)) {
+					System.out.println("User = true");
+					if(accountType.equals("Checking")) {
+						return balance;
+					}
+				}
+			}
+		}
+		catch(Exception e) {
+			JOptionPane.showMessageDialog(null, "Read failed");
+		}
+		return balance;
+		
+	}
+	
+	public static double readSavings() {
+		String username = "";
+		String accountType = "";
+		double balance = 0;
+		try {
+			scanner = new Scanner(new File("accounts.txt"));
+			scanner.useDelimiter("[,\n]");
+				
+			while(scanner.hasNext()) {
+				username = scanner.next();
+				accountType = scanner.next();
+				balance = Double.valueOf(scanner.next());
+				System.out.println(username);
+				if(username.equals(name)) {
+					System.out.println("User = true");
+					if(accountType.equals("Savings")) {
+						return balance;
+					}
+				}
+			}
+		}
+		catch(Exception e) {
+			JOptionPane.showMessageDialog(null, "Read failed");
+		}
+		return balance;
+		
+	}
+	
+	public static void writeChecking(double input) {
+		String updateFile = "update.txt";
+		File oldFile = new File(filepath);
+		File newFile = new File(updateFile);
+		String username = "";
+		String accountType = "";
+		String balance = "";
+		double newBalance = 0;
+		try {
+			FileWriter fw = new FileWriter(updateFile, false);
+			BufferedWriter bw = new BufferedWriter(fw);
+			PrintWriter pw = new PrintWriter(bw);
+			
+			scanner = new Scanner(new File(filepath));
+			scanner.useDelimiter("[,\n]");
+			
+			while(scanner.hasNext()) {
+				username = scanner.next();
+				accountType = scanner.next();
+				balance = scanner.next();
+				newBalance = Double.valueOf(balance);
+				System.out.println(username);
+				if(username.equals(name)) {
+					System.out.println("User = true");
+					if(accountType.equals("Checking")) {
+						balance = Double.toString(newBalance + input);
+						if(newBalance + input < 0) {
+							balance = "0";
+						}
+						pw.println(username + "," + accountType + "," + balance);
+					}
+					else {
+						pw.println(username + "," + accountType + "," + balance);
+					}
+				}
+				else {
+					pw.println(username + "," + accountType + "," + balance);
+				}
+			}
+			scanner.close();
+			pw.flush();
+			pw.close();
+			
+				fw = new FileWriter(LoginController.filepath2, false);
+				bw = new BufferedWriter(fw);
+				pw = new PrintWriter(bw);
+				
+				scanner = new Scanner(new File(updateFile));
+				scanner.useDelimiter("[,\n]");
+				
+				while(scanner.hasNext()) {
+					username = scanner.next();
+					accountType = scanner.next();
+					balance = scanner.next();
+					System.out.println(username);
+					pw.println(username + "," + accountType + "," + balance);
+					
+				}
+				scanner.close();
+				pw.flush();
+				pw.close();
+		}
+		catch(Exception e) {
+			JOptionPane.showMessageDialog(null, "Read failed");
+		}
+		
+	}
+	static String filepath = "accounts.txt";
+	public static void writeSavings(double input) {
+		String updateFile = "update.txt";
+		File oldFile = new File(filepath);
+		File newFile = new File(updateFile);
+		String username = "";
+		String accountType = "";
+		String balance = "";
+		double newBalance = 0;
+		try {
+			FileWriter fw = new FileWriter(updateFile, false);
+			BufferedWriter bw = new BufferedWriter(fw);
+			PrintWriter pw = new PrintWriter(bw);
+			
+			scanner = new Scanner(new File(filepath));
+			scanner.useDelimiter("[,\n]");
+			
+			while(scanner.hasNext()) {
+				username = scanner.next();
+				accountType = scanner.next();
+				balance = scanner.next();
+				newBalance = Double.valueOf(balance);
+				System.out.println(username);
+				if(username.equals(name)) {
+					System.out.println("User = true");
+					if(accountType.equals("Savings")) {
+						balance = Double.toString(newBalance + input);
+						if(newBalance + input < 0) {
+							balance = "0";
+						}
+						pw.println(username + "," + accountType + "," + balance);
+					}
+					else {
+						pw.println(username + "," + accountType + "," + balance);
+					}
+				}
+				else {
+					pw.println(username + "," + accountType + "," + balance);
+				}
+			}
+			scanner.close();
+			pw.flush();
+			pw.close();
+			
+				fw = new FileWriter(LoginController.filepath2, false);
+				bw = new BufferedWriter(fw);
+				pw = new PrintWriter(bw);
+				
+				scanner = new Scanner(new File(updateFile));
+				scanner.useDelimiter("[,\n]");
+				
+				while(scanner.hasNext()) {
+					username = scanner.next();
+					accountType = scanner.next();
+					balance = scanner.next();
+					System.out.println(username);
+					pw.println(username + "," + accountType + "," + balance);
+					
+				}
+				scanner.close();
+				pw.flush();
+				pw.close();
+			
+		}
+		catch(Exception e) {
+			JOptionPane.showMessageDialog(null, "Read failed");
+		}
 	}
 	
 	@FXML
@@ -117,14 +323,26 @@ public class PrimaryController {
 	
 	@FXML
 	private void depositOnClick() {
-		balanceValue.setText(""+presenter.deposit(currentAccount, "bob", 20));
-		transactionHistory.setText(presenter.fetchTransactionHistory(currentAccount, "bob"));
+		balanceValue.setText(""+presenter.deposit(currentAccount, name, 20));
+		if(currentAccount == 2) {
+			writeChecking(20);
+		}
+		if(currentAccount == 1) {
+			writeSavings(20);
+		}
+		transactionHistory.setText(presenter.fetchTransactionHistory(currentAccount, name));
 	}
 	
 	@FXML
 	private void withdrawOnClick() {
-		balanceValue.setText(""+presenter.withdraw(currentAccount, "bob", 20));
-		transactionHistory.setText(presenter.fetchTransactionHistory(currentAccount, "bob"));
+		balanceValue.setText(""+presenter.withdraw(currentAccount, name, 20));
+		if(currentAccount == 2) {
+			writeChecking(-20);
+		}
+		if(currentAccount == 1) {
+			writeSavings(-20);
+		}
+		transactionHistory.setText(presenter.fetchTransactionHistory(currentAccount, name));
 	}
 	
 	@FXML
