@@ -44,14 +44,16 @@
                 				</ComboBox>
                 				<Label fx:id="balanceLabel" alignment="TOP_LEFT" layoutX="14.0" layoutY="60.0" text="Balance:" textAlignment="CENTER" />
                 				<Label fx:id="balanceValue" alignment="TOP_LEFT" layoutX="80.0" layoutY="60.0" text="" textAlignment="CENTER" />
-                				<ScrollPane id="transactionHistoryPane" layoutX="14" layoutY="175" prefHeight="50" prefWidth="400">
+                				<ScrollPane id="transactionHistoryPane" layoutX="14" layoutY="175" prefWidth="400" prefHeight="70">
                 					<content>
-                							<Label fx:id="transactionHistory" alignment="TOP_LEFT" text="" textAlignment="LEFT" wrapText="True" />
+                							<Label fx:id="transactionHistory" alignment="TOP_LEFT" prefWidth="379.0" text="" textAlignment="LEFT" wrapText="True" />
                 					</content>
                 				</ScrollPane>
-                				<Button fx:id="depositButton" layoutX="14.0" layoutY="100.0" mnemonicParsing="false" onAction="#depositOnClick" text="Make Deposit" />
+                				<Button fx:id="depositButton" layoutX="204.0" layoutY="94.0" mnemonicParsing="false" onAction="#depositOnClick" text="Make Deposit" />
                    				<Label fx:id="transactionHistoryLabel" alignment="TOP_LEFT" layoutX="14.0" layoutY="150" text="Transaction History" textAlignment="CENTER" />           				
-                				<Button fx:id="withdrawButton" layoutX="140.0" layoutY="100.0" mnemonicParsing="false" onAction="#withdrawOnClick" text="Make Withdrawal" />
+                				<Button fx:id="withdrawButton" layoutX="317.0" layoutY="94.0" mnemonicParsing="false" onAction="#withdrawOnClick" text="Make Withdrawal" />
+                              	<TextField fx:id="depositField" layoutX="14.0" layoutY="94.0" promptText="Add/Remove Funds" />
+                              	<Label fx:id="errorLabel" layoutX="15.0" layoutY="126.0" prefHeight="17.0" prefWidth="204.0" textFill="#f80000" />
                 			</children>
                 		</Pane>
                 	</content>
