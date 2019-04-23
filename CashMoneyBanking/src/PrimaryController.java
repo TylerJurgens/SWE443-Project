@@ -75,7 +75,7 @@ public class PrimaryController {
 	@FXML
 	public void initialize() { //Automatically called upon being loaded
 		this.virtHelp = new VirtHelpEventHandler();
-		
+
 		this.currentAccount = -1;
 		this.presenter = new MVPresenter();
 		this.accountIDs = presenter.fetchAccounts(name);
@@ -440,12 +440,14 @@ public class PrimaryController {
 			JOptionPane.showMessageDialog(null, "Invalid value given for deposit: Please enter a number greater than 0");
 		}
 		else if(valid) {
-			balanceValue.setText(""+presenter.deposit(currentAccount, name, amount));
+			//balanceValue.setText(""+presenter.deposit(currentAccount, name, amount));
 			if(currentAccount == 2) {
 				writeChecking(amount);
+				balanceValue.setText(""+Double.toString(readChecking()));
 			}
 			if(currentAccount == 1) {
 				writeSavings(amount);
+				balanceValue.setText(""+Double.toString(readSavings()));
 			}
 			transactionHistory.setText(presenter.fetchTransactionHistory(currentAccount, name));
 
@@ -475,15 +477,16 @@ public class PrimaryController {
 			JOptionPane.showMessageDialog(null, "Invalid value given for withdrawal: Please enter a number greater than 0");
 		}
 		else if(valid) {
-			amount = presenter.withdraw(currentAccount, name, amount);
+			//amount = presenter.withdraw(currentAccount, name, amount);
 			if(amount >= 0)
 			{
-				balanceValue.setText(""+presenter.withdraw(currentAccount, name, amount));
 				if(currentAccount == 2) {
 					writeChecking(amount*(-1));
+					balanceValue.setText(""+Double.toString(readChecking()));
 				}
 				if(currentAccount == 1) {
 					writeSavings(amount*(-1));
+					balanceValue.setText(""+Double.toString(readSavings()));
 				}
 				transactionHistory.setText(presenter.fetchTransactionHistory(currentAccount, name));
 				//errorLabel.setTextFill(Color.GREEN);
