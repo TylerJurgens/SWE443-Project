@@ -102,10 +102,8 @@ public class LoginController {
 			while(scanner.hasNext() && !foundUser) {
 				username = scanner.next();
 				scanner.next();
-				System.out.println(username);
 				if(username.equals(user)) {
 					foundUser = true;
-					System.out.println("User = true");
 				}
 				if(foundUser) {
 					ans = true;
@@ -126,22 +124,18 @@ public class LoginController {
 		String password = "_";
 		try {
 			scanner = new Scanner(new File(filepath));
-			scanner.useDelimiter("[,\n]");
+			scanner.useDelimiter("[,\r\n]");
 				
 			while(scanner.hasNext() && !foundUser && !correctPassword) {
 				username = scanner.next();
 				password = scanner.next();
-				System.out.println(username);
-				System.out.println(password);
 				if(username.equals(user)) {
 					foundUser = true;
-					System.out.println("User = true");
 					if(password.equals(pass)) {
 						correctPassword = true;
-						System.out.println("Pass = true");
 					}
 				}
-				if(foundUser) {
+				if(foundUser && correctPassword) {
 					ans = true;
 				}
 			}
@@ -155,15 +149,12 @@ public class LoginController {
 	
 	@FXML
 	private void loginClicked() {
-		System.out.println("Username: " + this.usernameLoginField.getText());
-		System.out.println("Password: " + this.passwordLoginField.getText());
 		
 		String username = this.usernameLoginField.getText();
 		if(readUserAndPass(username, this.passwordLoginField.getText())) {
 		// This if statement should check the username and password against the database
 			Stage s = (Stage)(loginButton.getScene().getWindow());
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("PrimaryScreen.fxml"));
-			
 			Scene scene = null;
 			try {
 				scene = new Scene(loader.load());

@@ -29,7 +29,6 @@ public class Model {
 		{
 			if(accounts[i].getID() == account)
 			{
-				System.out.println("Account " + account +" , " + accounts[i].getID());
 				return accounts[i].getBalance();
 			}
 		}
@@ -41,7 +40,7 @@ public class Model {
 		return true;
 	}
 	
-	public double depositFunds(int account, int amount)
+	public double depositFunds(int account, double amount)
 	{
 		if(amount < 0)
 			return -1;
@@ -56,7 +55,7 @@ public class Model {
 		return 0.0;
 	}
 	
-	public double withdrawFunds(int account, int amount)
+	public double withdrawFunds(int account, double amount)
 	{
 		if(amount < 0)
 			return -1;
