@@ -55,7 +55,7 @@ public class PrimaryController {
 	@FXML
 	private Label settings_nameLabel;
 	@FXML
-	private TextField settings_nameField;
+	private Label settings_nameField;
 	@FXML
 	private Label settings_passwordLabel;
 	@FXML
@@ -85,7 +85,6 @@ public class PrimaryController {
 		this.presenter = new MVPresenter();
 		this.accountIDs = presenter.fetchAccounts(name);
 		
-		
 		//Binds a listener to accountSelection, updating the value of currentAccount when changed
 	    accountSelection.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 	    		@Override public void changed(ObservableValue<? extends String> selected, String oldAccount, String newAccount) {
@@ -110,6 +109,7 @@ public class PrimaryController {
 	
 	public void setUser(String user) {
 		this.name = user;
+		this.settings_nameField.setText(this.name);
 	}
 	
 	public static String getUser() {
@@ -424,5 +424,9 @@ public class PrimaryController {
 		this.virtHelpToggle.setText((this.helpToggle) ?"On":"Off");
 		
 		this.virtHelp.handleEvent(this.helpToggle, this.helperText, this.virtHelpToggle.getText());
+	}
+	
+	@FXML
+	private void updatePasswordClicked() { // this should change the user's password in the database
 	}
 }

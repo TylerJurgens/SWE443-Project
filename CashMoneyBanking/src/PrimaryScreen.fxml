@@ -44,7 +44,7 @@
                 				</ComboBox>
                 				<Label fx:id="balanceLabel" alignment="TOP_LEFT" layoutX="14.0" layoutY="60.0" text="Balance:" textAlignment="CENTER" />
                 				<Label fx:id="balanceValue" alignment="TOP_LEFT" layoutX="80.0" layoutY="60.0" text="" textAlignment="CENTER" />
-                				<ScrollPane id="transactionHistoryPane" layoutX="14" layoutY="175" prefWidth="400" prefHeight="70">
+                				<ScrollPane id="transactionHistoryPane" layoutX="14" layoutY="175" prefHeight="70" prefWidth="400">
                 					<content>
                 							<Label fx:id="transactionHistory" alignment="TOP_LEFT" prefWidth="379.0" text="" textAlignment="LEFT" wrapText="True" />
                 					</content>
@@ -64,10 +64,10 @@
                            <children>
                               <Button fx:id="signoutButton" layoutX="14.0" layoutY="214.0" mnemonicParsing="false" onAction="#signoutClicked" text="Sign Out" />
                               <Label fx:id="settings_nameLabel" layoutX="18.0" layoutY="48.0" text="Username" />
-                              <TextField fx:id="settings_nameField" layoutX="77.0" layoutY="44.0" />
                               <Label fx:id="settings_passwordLabel" layoutX="20.0" layoutY="84.0" text="Password" />
                               <TextField fx:id="settings_passwordField" layoutX="77.0" layoutY="80.0" />
-                              <Button fx:id="settings_update" layoutX="105.0" layoutY="114.0" mnemonicParsing="false" text="Update Information" />
+                              <Button fx:id="settings_update" layoutX="117.0" layoutY="114.0" mnemonicParsing="false" onAction="#updatePasswordClicked" text="Update Password" />
+                              <Label fx:id="settings_nameField" layoutX="76.0" layoutY="48.0" prefWidth="150.0" text="Username is here" />
                            </children>
                         </Pane>
                      </content>
