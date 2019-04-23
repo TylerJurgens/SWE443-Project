@@ -76,11 +76,6 @@ public class PrimaryController {
 	public void initialize() { //Automatically called upon being loaded
 		this.virtHelp = new VirtHelpEventHandler();
 		
-		this.helpToggle = true; // should be retrieved from database
-		this.virtHelpToggle.setSelected(!this.helpToggle);
-		this.virtHelpToggle.setText((this.helpToggle) ?"On":"Off");
-		this.virtHelp.handleEvent(this.helpToggle, this.helperText, this.virtHelpToggle.getText());
-		
 		this.currentAccount = -1;
 		this.presenter = new MVPresenter();
 		this.accountIDs = presenter.fetchAccounts(name);
@@ -110,6 +105,11 @@ public class PrimaryController {
 	public void setUser(String user) {
 		this.name = user;
 		this.settings_nameField.setText(this.name);
+		
+		this.helpToggle = readHelperToggle(); // should be retrieved from database
+		this.virtHelpToggle.setSelected(!this.helpToggle);
+		this.virtHelpToggle.setText((this.helpToggle) ?"On":"Off");
+		this.virtHelp.handleEvent(this.helpToggle, this.helperText, this.virtHelpToggle.getText());
 	}
 	
 	public static String getUser() {
@@ -129,9 +129,9 @@ public class PrimaryController {
 				username = scanner.next();
 				accountType = scanner.next();
 				balance = Double.valueOf(scanner.next());
-				System.out.println(username);
+				//System.out.println(username);
 				if(username.equals(name)) {
-					System.out.println("User = true");
+					//System.out.println("User = true");
 					if(accountType.equals("Checking")) {
 						return balance;
 					}
@@ -139,6 +139,7 @@ public class PrimaryController {
 			}
 		}
 		catch(Exception e) {
+			System.out.println("readcheckings()");
 			JOptionPane.showMessageDialog(null, "Read failed");
 		}
 		return balance;
@@ -157,9 +158,9 @@ public class PrimaryController {
 				username = scanner.next();
 				accountType = scanner.next();
 				balance = Double.valueOf(scanner.next());
-				System.out.println(username);
+				//System.out.println(username);
 				if(username.equals(name)) {
-					System.out.println("User = true");
+					//System.out.println("User = true");
 					if(accountType.equals("Savings")) {
 						return balance;
 					}
@@ -167,6 +168,7 @@ public class PrimaryController {
 			}
 		}
 		catch(Exception e) {
+			System.out.println("readsavings()");
 			JOptionPane.showMessageDialog(null, "Read failed");
 		}
 		return balance;
@@ -194,9 +196,9 @@ public class PrimaryController {
 				accountType = scanner.next();
 				balance = scanner.next();
 				newBalance = Double.valueOf(balance);
-				System.out.println(username);
+				//System.out.println(username);
 				if(username.equals(name)) {
-					System.out.println("User = true");
+					//System.out.println("User = true");
 					if(accountType.equals("Checking")) {
 						balance = Double.toString(newBalance + input);
 						if(newBalance + input < 0) {
@@ -236,6 +238,7 @@ public class PrimaryController {
 				pw.close();
 		}
 		catch(Exception e) {
+			System.out.println("writecheckings()");
 			JOptionPane.showMessageDialog(null, "Read failed");
 		}
 		
@@ -262,9 +265,9 @@ public class PrimaryController {
 				accountType = scanner.next();
 				balance = scanner.next();
 				newBalance = Double.valueOf(balance);
-				System.out.println(username);
+				//System.out.println(username);
 				if(username.equals(name)) {
-					System.out.println("User = true");
+					//System.out.println("User = true");
 					if(accountType.equals("Savings")) {
 						balance = Double.toString(newBalance + input);
 						if(newBalance + input < 0) {
@@ -305,6 +308,86 @@ public class PrimaryController {
 			
 		}
 		catch(Exception e) {
+			System.out.println("writesavings()");
+			JOptionPane.showMessageDialog(null, "Read failed");
+		}
+	}
+	
+	private boolean readHelperToggle() {
+		Scanner scan;
+		String username = "";
+		int toggle = 0;
+		try {
+			scan = new Scanner(new File("helperToggle.txt"));
+			scan.useDelimiter("[,\n]");
+			while(scan.hasNext()) {
+				username = scan.next();
+				String temp = scan.next();
+				toggle = Integer.valueOf(temp.substring(0,temp.length()-1));
+				System.out.println("u:"+username+" t:"+toggle);
+				if(username.equals(name)) {
+						scan.close();
+						return (toggle==1);
+				}
+			}
+		}
+		catch(Exception e) {
+			System.out.println("readhelpertoggle()");
+			JOptionPane.showMessageDialog(null, "Read failed");
+		}
+		return toggle==1;
+		
+	}
+	
+	private void writeHelperToggle() {
+		String updateFile = "update.txt";
+		String username = "";
+		String toggle = "";
+		try {
+			FileWriter fw = new FileWriter(updateFile, false);
+			BufferedWriter bw = new BufferedWriter(fw);
+			PrintWriter pw = new PrintWriter(bw);
+			
+			scanner = new Scanner(new File("helpertoggle.txt"));
+			scanner.useDelimiter("[,\n]");
+			
+			while(scanner.hasNext()) {
+				username = scanner.next();
+				toggle = scanner.next();
+				toggle = toggle.substring(0, toggle.length()-1);
+				//System.out.println(username+" "+" "+toggle);
+				if(username.equals(name)) {
+					//System.out.println("User = true");
+					pw.println(username + "," + ((this.helpToggle)?1:0));
+				}
+				else {
+					pw.println(username + "," + toggle);
+				}
+			}
+			scanner.close();
+			pw.flush();
+			pw.close();
+			
+				fw = new FileWriter("helpertoggle.txt", false);
+				bw = new BufferedWriter(fw);
+				pw = new PrintWriter(bw);
+				
+				scanner = new Scanner(new File(updateFile));
+				scanner.useDelimiter("[,\n]");
+				
+				String line = "";
+				while(scanner.hasNextLine()) {
+					line = scanner.nextLine();
+					pw.println(line);
+					
+				}
+				scanner.close();
+				pw.flush();
+				pw.close();
+			
+		}
+		catch(Exception e) {
+			System.out.println("writerhelpertoggle()");
 			JOptionPane.showMessageDialog(null, "Read failed");
 		}
 	}
@@ -424,6 +507,8 @@ public class PrimaryController {
 		this.virtHelpToggle.setText((this.helpToggle) ?"On":"Off");
 		
 		this.virtHelp.handleEvent(this.helpToggle, this.helperText, this.virtHelpToggle.getText());
+		
+		this.writeHelperToggle();
 	}
 	
 	@FXML

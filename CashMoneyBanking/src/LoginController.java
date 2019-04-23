@@ -39,7 +39,8 @@ public class LoginController {
 	private Label authSuccessSignupLabel;
 	
 	private static String filepath = "users.txt";
-	public static File filepath2 = new File("accounts.txt");	
+	public static File filepath2 = new File("accounts.txt");
+	private static String filepath3 = "helpertoggle.txt";
 	
 	@FXML
 	private void signupClicked() {
@@ -83,13 +84,23 @@ public class LoginController {
 			pw.flush();
 			pw.close();
 			
+			fw = new FileWriter(filepath3, true);
+			bw = new BufferedWriter(fw);
+			pw = new PrintWriter(bw);
+			
+			pw.println(username+",1");
+			pw.flush();
+			pw.close();
+			
 			JOptionPane.showMessageDialog(null, "Record saved");
 			
 		}
 		catch(Exception E) {
+			System.out.println("saveuser()");
 			JOptionPane.showMessageDialog(null, "Record not saved");
 		}
 	}
+	
 	private static Scanner scanner;
 	private static boolean readUser(String user) {
 		boolean foundUser = false;
@@ -124,14 +135,16 @@ public class LoginController {
 		String password = "_";
 		try {
 			scanner = new Scanner(new File(filepath));
-			scanner.useDelimiter("[,\r\n]");
+			scanner.useDelimiter("[,\n]");
 				
 			while(scanner.hasNext() && !foundUser && !correctPassword) {
 				username = scanner.next();
 				password = scanner.next();
+				//System.out.println("u: "+username);
+				//System.out.println("p: "+password);
 				if(username.equals(user)) {
 					foundUser = true;
-					if(password.equals(pass)) {
+					if(password.substring(0,password.length()-1).equals(pass)) {
 						correctPassword = true;
 					}
 				}
@@ -141,6 +154,7 @@ public class LoginController {
 			}
 		}
 		catch(Exception e) {
+			System.out.println("readuserandpass()");
 			JOptionPane.showMessageDialog(null, "Read failed");
 		}
 		return ans;
