@@ -34,7 +34,7 @@
                 		<Pane prefHeight="200.0" prefWidth="438.0">
                 			<children>
                 				<Label id="accountSelectionLabel" layoutX="14.0" layoutY="16.0" styleClass="bold-label" text="Account:" />
-                				<ComboBox fx:id="accountSelection" LayoutY="13.0" layoutX="85.0" promptText="Choose your Account">
+                				<ComboBox fx:id="accountSelection" LayoutY="13.0" layoutX="85.0" onMouseEntered="#accountDropDownHover" promptText="Choose your Account">
                 					<items>
                 						<FXCollections fx:factory="observableArrayList">
           									<String fx:value="Checkings" />
@@ -46,13 +46,13 @@
                 				<Label fx:id="balanceValue" alignment="TOP_LEFT" layoutX="80.0" layoutY="60.0" text="" textAlignment="CENTER" />
                 				<ScrollPane id="transactionHistoryPane" layoutX="14" layoutY="175" prefHeight="70" prefWidth="400">
                 					<content>
-                							<Label fx:id="transactionHistory" alignment="TOP_LEFT" prefWidth="379.0" text="" textAlignment="LEFT" wrapText="True" />
+                							<Label fx:id="transactionHistory" alignment="TOP_LEFT" onMouseEntered="#transactionHistoryHover" prefWidth="379.0" text="" textAlignment="LEFT" wrapText="True" />
                 					</content>
                 				</ScrollPane>
-                				<Button fx:id="depositButton" layoutX="204.0" layoutY="94.0" mnemonicParsing="false" onAction="#depositOnClick" text="Make Deposit" />
+                				<Button fx:id="depositButton" layoutX="204.0" layoutY="94.0" mnemonicParsing="false" onAction="#depositOnClick" onMouseEntered="#depositHover" text="Make Deposit" />
                    				<Label fx:id="transactionHistoryLabel" alignment="TOP_LEFT" layoutX="14.0" layoutY="150" text="Transaction History" textAlignment="CENTER" />           				
-                				<Button fx:id="withdrawButton" layoutX="317.0" layoutY="94.0" mnemonicParsing="false" onAction="#withdrawOnClick" text="Make Withdrawal" />
-                              	<TextField fx:id="depositField" layoutX="14.0" layoutY="94.0" promptText="Add/Remove Funds" />
+                				<Button fx:id="withdrawButton" layoutX="317.0" layoutY="94.0" mnemonicParsing="false" onAction="#withdrawOnClick" onMouseEntered="#withdrawalHover" text="Make Withdrawal" />
+                              	<TextField fx:id="depositField" layoutX="14.0" layoutY="94.0" onMouseEntered="#balanceHover" promptText="Add/Remove Funds" />
                               	<Label fx:id="errorLabel" layoutX="15.0" layoutY="126.0" prefHeight="17.0" prefWidth="204.0" textFill="#f80000" />
                 			</children>
                 		</Pane>
@@ -62,11 +62,11 @@
                      <content>
                         <Pane prefHeight="200.0" prefWidth="438.0">
                            <children>
-                              <Button fx:id="signoutButton" layoutX="14.0" layoutY="214.0" mnemonicParsing="false" onAction="#signoutClicked" text="Sign Out" />
+                              <Button fx:id="signoutButton" layoutX="14.0" layoutY="214.0" mnemonicParsing="false" onAction="#signoutClicked" onMouseEntered="#signoutHover" text="Sign Out" />
                               <Label fx:id="settings_nameLabel" layoutX="18.0" layoutY="48.0" text="Username" />
                               <Label fx:id="settings_passwordLabel" layoutX="20.0" layoutY="84.0" text="Password" />
-                              <TextField fx:id="settings_passwordField" layoutX="77.0" layoutY="80.0" />
-                              <Button fx:id="settings_update" layoutX="117.0" layoutY="114.0" mnemonicParsing="false" onAction="#updatePasswordClicked" text="Update Password" />
+                              <TextField fx:id="settings_passwordField" layoutX="77.0" layoutY="80.0" onMouseEntered="#passwordHover" />
+                              <Button fx:id="settings_update" layoutX="117.0" layoutY="114.0" mnemonicParsing="false" onAction="#updatePasswordClicked" onMouseEntered="#updatePasswordHover" text="Update Password" />
                               <Label fx:id="settings_nameField" layoutX="76.0" layoutY="48.0" prefWidth="150.0" text="Username is here" />
                            </children>
                         </Pane>

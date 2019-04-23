@@ -44,7 +44,7 @@ public class PrimaryController {
 	@FXML
 	private ComboBox<String> accountSelection;
 	@FXML
-	private Label balanceLabel, balanceValue, transactionHistory, errorLabel;
+	private Label balanceLabel, balanceValue, transactionHistory, transactionHistoryLabel, errorLabel;
 	@FXML
 	private ScrollPane transactionHistoryPane;
 	@FXML
@@ -428,5 +428,40 @@ public class PrimaryController {
 	
 	@FXML
 	private void updatePasswordClicked() { // this should change the user's password in the database
+	}
+	
+	// All mouse hover methods for virtual helper are below this point
+	
+	@FXML
+	private void accountDropDownHover() {
+		this.virtHelp.handleEvent(this.helpToggle, this.helperText, this.accountSelection.getPromptText());
+	}
+	@FXML
+	private void balanceHover() {
+		this.virtHelp.handleEvent(this.helpToggle, this.helperText, this.balanceLabel.getText());
+	}
+	@FXML
+	private void depositHover() {
+		this.virtHelp.handleEvent(this.helpToggle, this.helperText, this.depositButton.getText());
+	}
+	@FXML
+	private void withdrawalHover() {
+		this.virtHelp.handleEvent(this.helpToggle, this.helperText, this.withdrawButton.getText());
+	}
+	@FXML
+	private void transactionHistoryHover() {
+		this.virtHelp.handleEvent(this.helpToggle, this.helperText, this.transactionHistoryLabel.getText());
+	}
+	@FXML
+	private void passwordHover() {
+		this.virtHelp.handleEvent(this.helpToggle, this.helperText, this.settings_passwordLabel.getText());
+	}
+	@FXML
+	private void updatePasswordHover() {
+		this.virtHelp.handleEvent(this.helpToggle, this.helperText, this.settings_update.getText());
+	}
+	@FXML
+	private void signoutHover() {
+		this.virtHelp.handleEvent(this.helpToggle, this.helperText, this.signoutButton.getText());
 	}
 }
